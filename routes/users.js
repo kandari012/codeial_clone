@@ -5,5 +5,6 @@ console.log("router");
 router.get("/profile", usersController.profile);
 router.get("/signIn", usersController.signIn);
 router.get("/signUp", usersController.signUp);
-router.post("/create", usersController.create);
+router.post("/createUser", usersController.create);
+router.post("/createSession", usersController.createSession);
 module.exports = router;
