@@ -1,7 +1,11 @@
 //require the library
 const mongoose = require("mongoose");
+require('dotenv').config()
 //connect to the db
-mongoose.connect("mongodb://localhost/codeial_clone_db"); //db name       contact_list_db
+mongoose.connect(process.env.DB_NAME,{
+  useNewUrlParser:true,
+  useUnifiedTopology: true
+}); //db name       contact_list_db
 //acquire the connection (to check if it is successful) to access db
 const db = mongoose.connection;
 

@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
-const port = 8000;
+
+require('dotenv').config()
 const cookieParser = require("cookie-parser");
 const expressLayout = require("express-ejs-layouts");
 const db = require("./config/mongoose");
@@ -35,9 +36,9 @@ app.set("views", "./views");
 
 app.use(
   session({
-    name: "codeial", //name of cookie
+    name: process.env.MONGO_STORE_NAME, //name of cookie
     //todo change the secret before deployment in prod mode
-    secret: "blah", //when encryption happens the key to encode and decode
+    secret: process.env.MONGO_STORE_SESSION, //when encryption happens the key to encode and decode
     saveUninitialized: false, //
     resave: false,
     cookie: {
@@ -60,10 +61,10 @@ app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
 
 app.use("/", require("./routes"));
-app.listen(port, function (err) {
+app.listen(process.env.PORT, function (err) {
   if (err) {
     console.log("error while firing server");
     return;
   }
-  console.log("server is running");
+  console.log("server is running-",process.env.PORT);
 });
